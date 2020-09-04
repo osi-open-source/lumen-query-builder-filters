@@ -1,0 +1,22 @@
+{
+  "name": "osi-open-source/filters",
+  "description": "Query Builder Filters API client",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "OSI WebTeam",
+      "email": "webteam@objectsystems.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.1.0",
+    "illuminate/support": ">=5.5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "QueryBuilder\\": "src/QueryBuilder"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
