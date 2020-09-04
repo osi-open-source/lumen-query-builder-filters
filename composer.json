@@ -2,6 +2,7 @@
   "name": "osi-open-source/lumen-query-builder-filters",
   "description": "Query Builder Filters API client",
   "license": "MIT",
+  "version": "1.0.0",
   "authors": [
     {
       "name": "OSI WebTeam",
@@ -17,6 +18,6 @@
       "QueryBuilder\\": "src/QueryBuilder"
     }
   },
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "prefer-stable": true
 }
