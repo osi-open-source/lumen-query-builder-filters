@@ -1,6 +1,6 @@
 <?php
 
-namespace QueryBuilder\Filters;
+namespace QueryBuilder;
 
 use QueryBuilder\Patterns\Between;
 use QueryBuilder\Patterns\In;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\App;
 
 /**
  * Class Filter
- * @package QueryBuilder\Filters
+ * @package QueryBuilder
  */
 class Filter
 {
