@@ -1,5 +1,5 @@
 {
-  "name": "osi-open-source/filters",
+  "name": "osi-open-source/lumen-query-builder-filters",
   "description": "Query Builder Filters API client",
   "license": "MIT",
   "authors": [
