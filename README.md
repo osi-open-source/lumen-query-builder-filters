@@ -7,13 +7,13 @@ Use query parameters to filter listings
 * Lumen >= 7.0
 
 ## Installation via Composer
-Add the following line to your `composer.json` and run install/update:
+##### Add the following line to your `composer.json` and run install/update:
 ```bash
 $ cd lumen-app
 $ composer require osi-open-source/lumen-query-builder-filters
 ```
 
-Or if you prefer, edit `composer.json` manually:
+##### Or if you prefer, edit `composer.json` manually:
 ```json
 {
     "require": {
@@ -21,6 +21,16 @@ Or if you prefer, edit `composer.json` manually:
     }
 }
 ```
+
+##### Modify the bootstrap file (```bootstrap/app.php```)
+```php
+use Osi\QueryBuider\SearchRequest;
+
+$app->middleware([
+    SearchRequest::class
+]);
+```
+
 ## Usage
 With Filters
     
