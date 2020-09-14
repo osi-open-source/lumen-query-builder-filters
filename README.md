@@ -24,7 +24,7 @@ $ composer require osi-open-source/lumen-query-builder-filters
 
 ##### Modify the bootstrap file (```bootstrap/app.php```)
 ```php
-use Osi\QueryBuider\SearchRequest;
+use Osi\QueryBuilder\Middleware\SearchRequest;
 
 $app->middleware([
     SearchRequest::class
