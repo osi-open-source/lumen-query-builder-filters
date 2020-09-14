@@ -14,7 +14,7 @@
   },
   "autoload": {
     "psr-4": {
-      "QueryBuilder\\": "src/QueryBuilder"
+      "Osi\\QueryBuilder\\": "src/QueryBuilder"
     }
   },
   "config": {
