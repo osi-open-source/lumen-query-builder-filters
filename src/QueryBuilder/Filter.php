@@ -1,13 +1,13 @@
 <?php
 
-namespace QueryBuilder;
+namespace Osi\QueryBuilder;
 
-use QueryBuilder\Patterns\Between;
-use QueryBuilder\Patterns\In;
-use QueryBuilder\Patterns\Like;
-use QueryBuilder\Patterns\NullPattern;
-use QueryBuilder\Patterns\Pattern;
-use QueryBuilder\Patterns\Where;
+use Osi\QueryBuilder\Patterns\Between;
+use Osi\QueryBuilder\Patterns\In;
+use Osi\QueryBuilder\Patterns\Like;
+use Osi\QueryBuilder\Patterns\NullPattern;
+use Osi\QueryBuilder\Patterns\Pattern;
+use Osi\QueryBuilder\Patterns\Where;
 use Closure;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;

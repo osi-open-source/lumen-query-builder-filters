@@ -1,6 +1,6 @@
 <?php
 
-namespace QueryBuilder\Patterns;
+namespace Osi\QueryBuilder\Patterns;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;

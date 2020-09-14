@@ -1,6 +1,6 @@
 <?php
 
-namespace QueryBuilder\Patterns;
+namespace Osi\QueryBuilder\Patterns;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Validator;
