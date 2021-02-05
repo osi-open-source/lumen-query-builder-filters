@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 
 /**
  * Class Where
- * @package QueryBuilder\Patterns
+ * @package Osi\QueryBuilder\Patterns
  */
 class Where implements Pattern
 {
@@ -17,13 +17,13 @@ class Where implements Pattern
         '<' => '>',
         '>' => '<',
         '<=' => '>',
-        '>=' => '<'
+        '>=' => '<',
     ];
 
     const RULES = [
         'value' => 'required',
         'pattern' => 'required|in:=,!=,<,>,<=,>=',
-        'not' => 'boolean'
+        'not' => 'boolean',
     ];
 
     /**
@@ -39,7 +39,7 @@ class Where implements Pattern
         if ($params['not'] ?? false) {
             $params['pattern'] = self::REVERSE_PATTERNS[$params['pattern']];
         }
-        if (isset($params['type']) && $params['type'] == "DATE") {
+        if (isset($params['type']) && $params['type'] === "DATE") {
             $queryBuilder->whereDate($field, $params['pattern'], $params['value']);
         } else {
             $queryBuilder->where($field, $params['pattern'], $params['pattern']);

@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Interface Pattern
- * @package QueryBuilder\Patterns
+ * @package Osi\QueryBuilder\Patterns
  */
 interface Pattern
 {
-
     /**
      * @param string $field
      * @param array $params

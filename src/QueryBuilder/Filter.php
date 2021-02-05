@@ -2,21 +2,16 @@
 
 namespace Osi\QueryBuilder;
 
-use Osi\QueryBuilder\Patterns\Between;
-use Osi\QueryBuilder\Patterns\In;
-use Osi\QueryBuilder\Patterns\Like;
-use Osi\QueryBuilder\Patterns\NullPattern;
-use Osi\QueryBuilder\Patterns\Pattern;
-use Osi\QueryBuilder\Patterns\Where;
+use Illuminate\Container\Container;
+use Osi\QueryBuilder\Patterns;
 use Closure;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\App;
 
 /**
  * Class Filter
- * @package QueryBuilder
+ * @package Osi\QueryBuilder
  */
 class Filter
 {
@@ -25,22 +20,22 @@ class Filter
     public const WITH = "with";
     public const WHERE_VALUE = "value";
     public const WHERE_PATTERN = "pattern";
-    public const WHERE_NOT = "not";
     public const ORDER_BY = "order_by";
     public const ORDER_NAME = "name";
     public const ORDER_DIRECTION = "direction";
 
     public const DEFAULT_PATTERNS = [
-        '='       => Where::class,
-        '!='      => Where::class,
-        '>'       => Where::class,
-        '<'       => Where::class,
-        '>='      => Where::class,
-        '<='      => Where::class,
-        'LIKE'    => Like::class,
-        'BETWEEN' => Between::class,
-        'IN'      => In::class,
-        'NULL'    => NullPattern::class,
+        '='       => Patterns\Where::class,
+        '!='      => Patterns\Where::class,
+        '>'       => Patterns\Where::class,
+        '<'       => Patterns\Where::class,
+        '>='      => Patterns\Where::class,
+        '<='      => Patterns\Where::class,
+        'LIKE'    => Patterns\Like::class,
+        'BETWEEN' => Patterns\Between::class,
+        'IN'      => Patterns\In::class,
+        'NULL'    => Patterns\NullPattern::class,
+        'SCOPE'   => Patterns\Scope::class,
     ];
 
     private $patterns;
@@ -60,7 +55,6 @@ class Filter
      * @param array $searchCriteria
      * @param Builder $queryBuilder
      * @return Builder
-     * @throws Exception
      */
     public function where(array $searchCriteria, Builder $queryBuilder): Builder
     {
@@ -88,7 +82,7 @@ class Filter
         $allValues = explode(',', $value ?? '');
         if (count($allValues) > 1) {
             $queryBuilder->whereIn($key, $allValues);
-        } elseif ($value === null || $value == "NULL" || $value == "null") {
+        } elseif ($value === null || $value === "NULL" || $value === "null") {
             $queryBuilder->whereNull($key);
         } else {
             $queryBuilder->where($key, "=", $value);
@@ -129,7 +123,7 @@ class Filter
             } else {
                 $queryBuilder->orderBy($orderBy);
             }
-        } elseif (is_array($orderBy) && isset($orderBy[self::ORDER_NAME])) {
+        } elseif (isset($orderBy[self::ORDER_NAME])) {
             $queryBuilder->orderBy($orderBy[self::ORDER_NAME], $orderBy[self::ORDER_DIRECTION] ?? "ASC");
         } elseif (is_array($orderBy)) {
             foreach ($orderBy as $element) {
@@ -144,6 +138,7 @@ class Filter
      * @param Builder $queryBuilder
      * @param Closure|null $middleClosure
      * @return Builder
+     * @throws Exception
      */
     public function search(array $filters, Builder $queryBuilder, ?Closure $middleClosure = null): Builder
     {
@@ -164,19 +159,14 @@ class Filter
 
     /**
      * @param string $patternKey
-     * @return Pattern
+     * @return Patterns\Pattern
      * @throws Exception
      */
-    private function getPattern(string $patternKey): Pattern
+    private function getPattern(string $patternKey): Patterns\Pattern
     {
         if (!class_exists($this->patterns[$patternKey])) {
-            throw new Exception('Pattern is not defined');
+            throw new InvalidPatternException('Pattern is not defined');
         }
-        /** @var Pattern $pattern */
-        $pattern = App::make($this->patterns[$patternKey]);
-        if (!$pattern instanceof Pattern) {
-            throw new Exception('Pattern is not defined');
-        }
-        return $pattern;
+        return Container::getInstance()->make($this->patterns[$patternKey]);
     }
 }
