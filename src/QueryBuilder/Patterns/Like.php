@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 
 /**
  * Class Like
- * @package QueryBuilder\Patterns
+ * @package Osi\QueryBuilder\Patterns
  */
 class Like implements Pattern
 {

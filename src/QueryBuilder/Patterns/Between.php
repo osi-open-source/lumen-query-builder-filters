@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 /**
  * Class Between
- * @package QueryBuilder\Patterns
+ * @package Osi\QueryBuilder\Patterns
  */
 class Between implements Pattern
 {
@@ -31,7 +31,7 @@ class Between implements Pattern
     {
         Validator::validate($params, self::RULES);
 
-        if (isset($params['type']) && $params['type'] == "DATE") {
+        if (isset($params['type']) && $params['type'] === "DATE") {
             $params['startRange'] = new Carbon($params['startRange'] ?? '0001-01-01');
             $params['endRange'] = new Carbon($params['endRange'] ?? '9999-12-01');
         }

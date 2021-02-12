@@ -6,12 +6,10 @@ use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class NullPattern
- * @package QueryBuilder\Patterns
+ * @package Osi\QueryBuilder\Patterns
  */
 class NullPattern implements Pattern
 {
-    const PATTERNS = ['NULL'];
-
     /**
      * @param string $field
      * @param array $params
