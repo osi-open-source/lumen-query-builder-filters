@@ -52,12 +52,14 @@ class SearchRequest
     private function getSearchCriteriaRequest(Request $request): Request
     {
         $filters = json_decode($request->get('filters'), true);
+
+        $request->request->remove('filters');
+        $request->query->remove('filters');
+
         if (empty($filters) || !is_array($filters)) {
             return $request;
         }
 
-        $request->request->remove('filters');
-        $request->query->remove('filters');
         $request->merge(Arr::except($filters, ['take', 'skip', 'page', 'with', 'sort']));
         $request->offsetSet('perPage', $perPage = (int) ($filters['take'] ?? $filters['perPage'] ?? $request->get('perPage', self::ITEMS_PER_PAGE)));
         if (isset($filters['skip'])) {
